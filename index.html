@@ -3,94 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navegantes | Sua Jornada Internacional Começa Aqui</title>
+    <title>Navegantes | Seu Porto Seguro no Mundo</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --brand-primary: #102A43; /* Azul Marinho Sofisticado */
-            --brand-accent: #0091FF; /* Azul Elétrico Stripe */
-            --brand-light: #F0f4f8;
+            --brand-navy: #0B1D33; /* Azul escuro do oceano */
+            --brand-ocean: #0066CC; /* Azul mar aberto */
+            --brand-sand: #F4EEDC; /* Areia clara */
+            --white: #ffffff;
             --text-main: #243B53;
             --text-muted: #627D98;
-            --white: #ffffff;
-            --shadow-md: 0 10px 15px -3px rgba(16, 42, 67, 0.1), 0 4px 6px -2px rgba(16, 42, 67, 0.05);
+            --shadow: 0 10px 25px rgba(11, 29, 51, 0.1);
             --transition: all 0.3s ease;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--brand-light); color: var(--text-main); line-height: 1.6; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAFC; color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        /* --- UI Elements --- */
-        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: var(--transition); cursor: pointer; border: none; font-size: 1rem; }
-        .btn-primary { background-color: var(--brand-accent); color: var(--white); }
-        .btn-primary:hover { background-color: #0077D9; transform: translateY(-2px); }
-        .btn-secondary { background-color: var(--white); color: var(--brand-primary); border: 1px solid #D9E2EC; }
-        .btn-secondary:hover { background-color: #F0F4F8; }
+        /* --- Botoes --- */
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: 8px; font-weight: 700; text-decoration: none; transition: var(--transition); cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background-color: var(--brand-ocean); color: var(--white); }
+        .btn-primary:hover { background-color: #0052A3; transform: translateY(-2px); box-shadow: var(--shadow); }
+        .btn-secondary { background-color: var(--white); color: var(--brand-navy); }
+        .btn-secondary:hover { background-color: var(--brand-sand); }
 
         /* --- Header --- */
-        header { background-color: var(--white); padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--brand-primary); letter-spacing: -1px; }
-        .logo span { color: var(--brand-accent); }
-        nav ul { list-style: none; display: flex; gap: 24px; align-items: center; }
+        header { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .logo { font-weight: 800; font-size: 1.6rem; color: var(--brand-navy); letter-spacing: -1px; display: flex; align-items: center; gap: 8px; }
+        .logo svg { width: 24px; height: 24px; fill: var(--brand-ocean); }
+        nav ul { list-style: none; display: flex; gap: 30px; align-items: center; }
         nav a { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.95rem; }
-        nav a:hover { color: var(--brand-accent); }
+        nav a:hover { color: var(--brand-ocean); }
 
-        /* --- Hero --- */
-        .hero { background-color: var(--white); padding: 100px 5%; text-align: center; }
-        .hero-tag { display: inline-block; background-color: #E3F2FD; color: var(--brand-accent); padding: 6px 12px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; margin-bottom: 16px; }
-        .hero h1 { font-size: 3.5rem; font-weight: 800; color: var(--brand-primary); line-height: 1.2; letter-spacing: -2px; max-width: 800px; margin: 0 auto 24px auto; }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px auto; font-weight: 400; }
-        .hero-actions { display: flex; gap: 16px; justify-content: center; }
+        /* --- Hero (O Mar) --- */
+        .hero { 
+            position: relative;
+            padding: 120px 5%; 
+            text-align: center; 
+            background-image: linear-gradient(rgba(11, 29, 51, 0.7), rgba(11, 29, 51, 0.4)), url('https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Efeito Parallax suave */
+            color: var(--white);
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-tag { background-color: rgba(255,255,255,0.2); backdrop-filter: blur(5px); padding: 6px 16px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
+        .hero h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; letter-spacing: -2px; max-width: 800px; margin-bottom: 24px; }
+        .hero p { font-size: 1.25rem; max-width: 600px; margin-bottom: 40px; font-weight: 400; opacity: 0.9; }
 
-        /* --- Section Common --- */
-        section { padding: 80px 5%; }
+        /* --- Secoes Gerais --- */
+        section { padding: 90px 5%; }
         .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-size: 2.5rem; font-weight: 800; color: var(--brand-primary); letter-spacing: -1px; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 800; color: var(--brand-navy); letter-spacing: -1px; }
         .section-header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 8px; }
 
-        /* --- Grid & Cards --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+        /* --- Grid de Produtos --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
         
-        .card { background-color: var(--white); border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: var(--transition); border: 1px solid #F0F4F8; position: relative; display: flex; flex-direction: column; }
-        .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: #E3F2FD; }
+        .card { background-color: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); display: flex; flex-direction: column; position: relative; border: 1px solid #E2E8F0; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(11, 29, 51, 0.15); }
+        
+        /* Tema Visual dos Cards */
+        .card-img-header { height: 140px; background-size: cover; background-position: center; position: relative; }
+        .header-porto { background-image: url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=600&q=80'); }
+        .header-aero { background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80'); }
+        
+        .card-tag { position: absolute; top: 16px; right: 16px; background-color: var(--white); color: var(--brand-navy); padding: 4px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        
+        .card-body { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-body h3 { font-size: 1.4rem; font-weight: 800; color: var(--brand-navy); margin-bottom: 12px; }
+        .card-body p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px; flex-grow: 1; }
+        
+        .prof-info { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; margin-top: -50px; position: relative; z-index: 2; }
+        .prof-avatar { width: 70px; height: 70px; border-radius: 50%; border: 4px solid var(--white); background-size: cover; background-position: center; background-color: #eee; }
+        
+        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 20px; border-top: 1px dashed #CBD5E1; }
+        .price { font-size: 1.6rem; font-weight: 800; color: var(--brand-navy); }
+        .price span { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
 
-        /* Psicólogo Card */
-        .prof-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-        .prof-avatar { width: 64px; height: 64px; border-radius: 50%; background-color: var(--brand-light); background-size: cover; background-position: center; }
-        .prof-info h3 { font-size: 1.25rem; font-weight: 700; color: var(--brand-primary); }
-        .prof-info p { color: var(--brand-accent); font-weight: 600; font-size: 0.9rem; }
+        /* --- Modal de Pagamento (Cartão de Embarque) --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 29, 51, 0.85); z-index: 2000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(8px); }
         
-        /* Produto/Serviço Card */
-        .card-tag { position: absolute; top: 20px; right: 20px; background-color: var(--brand-light); color: var(--text-main); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
-        .card-icon { font-size: 2rem; margin-bottom: 20px; color: var(--brand-accent); }
-        .card h3 { font-size: 1.5rem; font-weight: 700; color: var(--brand-primary); margin-bottom: 12px; }
-        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px; flex-grow: 1; }
+        /* O Ticket de Embarque */
+        .boarding-pass { background-color: var(--white); width: 100%; max-width: 650px; border-radius: 16px; display: flex; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); position: relative; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
-        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 20px; border-top: 1px solid #F0F4F8; }
-        .price { font-size: 1.5rem; font-weight: 800; color: var(--brand-primary); }
-        .price span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
+        /* Lado Esquerdo do Ticket (Info do Voo/Serviço) */
+        .bp-left { padding: 30px; flex: 2; border-right: 2px dashed #CBD5E1; position: relative; background: radial-gradient(circle at right center, transparent 15px, var(--white) 16px); }
+        .bp-header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--brand-navy); padding-bottom: 15px; margin-bottom: 20px; }
+        .bp-title { font-weight: 800; color: var(--brand-navy); text-transform: uppercase; letter-spacing: 1px; }
+        .bp-flight { color: var(--brand-ocean); font-weight: 700; }
+        
+        .bp-row { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .bp-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+        .bp-value { font-size: 1.1rem; font-weight: 800; color: var(--brand-navy); }
+        
+        /* Lado Direito do Ticket (Valores e Checkout) */
+        .bp-right { padding: 30px; flex: 1; background-color: var(--brand-sand); position: relative; background: radial-gradient(circle at left center, transparent 15px, var(--brand-sand) 16px); display: flex; flex-direction: column; justify-content: center; }
+        .bp-right::before { content: ''; position: absolute; left: -15px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; background-color: rgba(11, 29, 51, 0.85); border-radius: 50%; z-index: 10; }
+        
+        .bp-total-box { margin-bottom: 20px; }
+        .bp-total-val { font-size: 2rem; font-weight: 800; color: var(--brand-navy); line-height: 1; }
+        
+        /* O Split detalhado */
+        .split-details { font-size: 0.8rem; margin-bottom: 20px; }
+        .split-line { display: flex; justify-content: space-between; margin-bottom: 5px; color: var(--text-main); font-weight: 600; }
+        .split-line.fee { color: var(--text-muted); font-weight: 400; }
+        
+        .close-modal { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 1.5rem; color: var(--text-main); z-index: 20; font-weight: bold; }
 
-        /* --- Footer --- */
-        footer { background-color: var(--brand-primary); color: #9FB3C8; padding: 60px 5%; text-align: center; }
-        footer .logo { color: var(--white); margin-bottom: 16px; display: block; }
-        footer p { font-size: 0.9rem; }
-
-        /* --- Modal Checkout --- */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(16, 42, 67, 0.8); z-index: 2000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(4px); }
-        .modal-content { background-color: var(--white); width: 100%; max-width: 500px; padding: 40px; border-radius: 16px; position: relative; box-shadow: var(--shadow-md); animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .close-modal { position: absolute; top: 20px; right: 20px; cursor: pointer; font-size: 1.5rem; color: var(--text-muted); }
-        
-        .checkout-header { border-bottom: 1px solid #F0F4F8; padding-bottom: 20px; margin-bottom: 20px; }
-        .checkout-header h3 { font-size: 1.5rem; color: var(--brand-primary); font-weight: 700; }
-        .summary-item { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 1rem; }
-        .summary-total { font-weight: 800; color: var(--brand-primary); font-size: 1.2rem; border-top: 1px solid #F0F4F8; padding-top: 12px; margin-top: 12px; }
-        .split-box { background-color: var(--brand-light); padding: 16px; border-radius: 8px; margin-top: 20px; font-size: 0.85rem; border-left: 4px solid var(--brand-accent); }
-        .split-info { color: var(--brand-primary); font-weight: 600; }
-        
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.8rem; }
+            .boarding-pass { flex-direction: column; }
+            .bp-left { border-right: none; border-bottom: 2px dashed #CBD5E1; background: var(--white); }
+            .bp-right { background: var(--brand-sand); }
+            .bp-right::before { display: none; }
             nav ul { display: none; }
         }
     </style>
@@ -98,146 +129,200 @@
 <body>
 
     <header>
-        <div class="logo">nave<span>gantes</span></div>
+        <div class="logo">
+            <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm9-14L4 14h16L12 4z"/></svg>
+            NAVEGANTES
+        </div>
         <nav>
             <ul>
-                <li><a href="#psicologos">Psicólogos</a></li>
-                <li><a href="#consultoria">Consultoria</a></li>
-                <li><a href="#">Como Funciona</a></li>
-                <li><a href="#" class="btn btn-secondary btn-sm">Login Profissional</a></li>
+                <li><a href="#porto-seguro">Porto Seguro (Saúde)</a></li>
+                <li><a href="#plano-voo">Plano de Voo (Consultoria)</a></li>
+                <li><a href="#" class="btn btn-primary" style="padding: 8px 16px;">Login Profissional</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
-        <span class="hero-tag">Sua plataforma global de apoio</span>
-        <h1>Apoio psicológico e estratégico para sua vida no exterior.</h1>
-        <p>Conectamos brasileiros ao redor do mundo a profissionais especializados em mente e carreira internacional.</p>
-        <div class="hero-actions">
-            <a href="#servicos" class="btn btn-primary">Encontrar Profissional</a>
-            <a href="#" class="btn btn-secondary">Saiba Mais</a>
+        <span class="hero-tag">A sua jornada além-mar</span>
+        <h1>Navegue pelo mundo com um porto seguro.</h1>
+        <p>Apoio psicológico e estratégico (vistos, carreira, finanças) para brasileiros no exterior. Trace sua rota e embarque com segurança.</p>
+        <div style="display: flex; gap: 16px;">
+            <a href="#porto-seguro" class="btn btn-primary">Ver Profissionais</a>
         </div>
     </section>
 
-    <section id="psicologos">
+    <section id="porto-seguro">
         <div class="section-header">
-            <h2>Psicólogos Especialistas</h2>
-            <p>Profissionais focados nos desafios da mente global.</p>
+            <h2>⚓ Seu Porto Seguro</h2>
+            <p>Psicólogos especializados em luto migratório, ansiedade e adaptação cultural.</p>
         </div>
         <div class="grid">
             <div class="card">
-                <div class="prof-header">
-                    <div class="prof-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg')"></div>
-                    <div class="prof-info">
-                        <h3>Dra. Camila Moraes</h3>
-                        <p>Luto Migratório & Adaptação</p>
-                    </div>
+                <div class="card-img-header header-porto">
+                    <span class="card-tag">Psicologia</span>
                 </div>
-                <p>Apoio focado em brasileiros que enfrentam desafios emocionais na Europa e EUA.</p>
-                <div class="card-footer">
-                    <div class="price">R$ 220 <span>/sessão</span></div>
-                    <button class="btn btn-primary btn-sm" onclick="openCheckout('Sessão com Dra. Camila Moraes', 220, 'EUR')">Agendar</button>
+                <div class="card-body">
+                    <div class="prof-info">
+                        <div class="prof-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg')"></div>
+                        <div>
+                            <div class="bp-label">Especialista</div>
+                            <div style="font-weight: 700; color: var(--brand-navy);">Dra. Camila Moraes</div>
+                        </div>
+                    </div>
+                    <h3>Terapia de Ancoragem</h3>
+                    <p>Apoio focado em brasileiros que enfrentam desafios emocionais e solidão na Europa.</p>
+                    <div class="card-footer">
+                        <div class="price">R$ 220 <span>/Sessão</span></div>
+                        <button class="btn btn-primary" onclick="openBoardingPass('Dra. Camila Moraes', 'Terapia de Ancoragem', 220, 'EUR', 'LIS')">Embarcar</button>
+                    </div>
                 </div>
             </div>
+
             <div class="card">
-                <div class="prof-header">
-                    <div class="prof-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg')"></div>
-                    <div class="prof-info">
-                        <h3>Dr. Ricardo Dias</h3>
-                        <p>Ansiedade & Carreira</p>
-                    </div>
+                <div class="card-img-header header-porto">
+                    <span class="card-tag">Psicologia</span>
                 </div>
-                <p>Especialista em ansiedade de performance para executivos brasileiros no exterior.</p>
-                <div class="card-footer">
-                    <div class="price">R$ 250 <span>/sessão</span></div>
-                    <button class="btn btn-primary btn-sm" onclick="openCheckout('Sessão com Dr. Ricardo Dias', 250, 'USD')">Agendar</button>
+                <div class="card-body">
+                    <div class="prof-info">
+                        <div class="prof-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg')"></div>
+                        <div>
+                            <div class="bp-label">Especialista</div>
+                            <div style="font-weight: 700; color: var(--brand-navy);">Dr. Ricardo Dias</div>
+                        </div>
+                    </div>
+                    <h3>Bússola de Carreira</h3>
+                    <p>Especialista em ansiedade de performance para executivos brasileiros nos EUA.</p>
+                    <div class="card-footer">
+                        <div class="price">R$ 280 <span>/Sessão</span></div>
+                        <button class="btn btn-primary" onclick="openBoardingPass('Dr. Ricardo Dias', 'Bússola de Carreira', 280, 'USD', 'JFK')">Embarcar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="consultoria" style="background-color: var(--white);">
+    <section id="plano-voo" style="background-color: var(--white);">
         <div class="section-header">
-            <h2>Produtos e Consultorias</h2>
-            <p>Soluções estratégicas para sua jornada além-mar.</p>
+            <h2>✈️ Plano de Voo</h2>
+            <p>Consultorias estratégicas para emissão de vistos, carreira e cidadania.</p>
         </div>
         <div class="grid">
             <div class="card">
-                <span class="card-tag">Carreira</span>
-                <div class="card-icon">💼</div>
-                <h3>Plano de Carreira Global</h3>
-                <p>Mentoria individual para estruturar seu currículo e buscar vagas na Europa e Canadá.</p>
-                <div class="card-footer">
-                    <div class="price">R$ 480</div>
-                    <button class="btn btn-primary btn-sm" onclick="openCheckout('Plano de Carreira Global', 480, 'CAD')">Contratar</button>
+                <div class="card-img-header header-aero">
+                    <span class="card-tag">Carreira</span>
+                </div>
+                <div class="card-body">
+                    <h3 style="margin-top: 20px;">Rota Executiva Global</h3>
+                    <p>Mentoria individual para reestruturar seu currículo e buscar vagas de alto nível no Canadá e Europa.</p>
+                    <div class="card-footer">
+                        <div class="price">R$ 480 <span>/Pacote</span></div>
+                        <button class="btn btn-primary" onclick="openBoardingPass('Consultoria Carreira', 'Rota Executiva Global', 480, 'CAD', 'YYZ')">Emitir Bilhete</button>
+                    </div>
                 </div>
             </div>
+
             <div class="card">
-                <span class="card-tag">Vistos</span>
-                <div class="card-icon">🛂</div>
-                <h3>Consultoria Visto Cidadania</h3>
-                <p>Análise completa de elegibilidade para cidadania italiana e portuguesa.</p>
-                <div class="card-footer">
-                    <div class="price">R$ 350</div>
-                    <button class="btn btn-primary btn-sm" onclick="openCheckout('Consultoria Visto Cidadania', 350, 'EUR')">Contratar</button>
+                <div class="card-img-header header-aero">
+                    <span class="card-tag">Imigração</span>
+                </div>
+                <div class="card-body">
+                    <h3 style="margin-top: 20px;">Visto & Cidadania</h3>
+                    <p>Análise completa de elegibilidade e documentação para cidadania italiana e portuguesa.</p>
+                    <div class="card-footer">
+                        <div class="price">R$ 350 <span>/Consulta</span></div>
+                        <button class="btn btn-primary" onclick="openBoardingPass('Navegantes Legal', 'Visto & Cidadania', 350, 'EUR', 'MXP')">Emitir Bilhete</button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <footer>
-        <div class="logo">nave<span>gantes</span></div>
-        <p>&copy; 2024 Navegantes Technology. Intermediação de Serviços Globais.</p>
-    </footer>
 
     <div id="checkoutModal" class="modal">
-        <div class="modal-content">
+        <div class="boarding-pass">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div class="checkout-header">
-                <h3>Resumo do Agendamento</h3>
-                <p id="checkout-item-name" style="color: var(--brand-accent); font-weight: 600;"></p>
+            
+            <div class="bp-left">
+                <div class="bp-header">
+                    <div class="bp-title">Cartão de Embarque</div>
+                    <div class="bp-flight">NVG-2026</div>
+                </div>
+                
+                <div class="bp-row">
+                    <div>
+                        <div class="bp-label">Passageiro / Paciente</div>
+                        <div class="bp-value">Visitante VIP</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="bp-label">Destino de Conversão</div>
+                        <div class="bp-value" id="bp-dest">GRU ✈️ LIS</div>
+                    </div>
+                </div>
+                
+                <div class="bp-row" style="margin-bottom: 0;">
+                    <div>
+                        <div class="bp-label">Profissional / Guia</div>
+                        <div class="bp-value" id="bp-prof">Dra. Nome</div>
+                    </div>
+                    <div>
+                        <div class="bp-label">Serviço</div>
+                        <div class="bp-value" id="bp-serv" style="font-size: 1rem;">Terapia</div>
+                    </div>
+                </div>
             </div>
             
-            <div class="summary-item">
-                <span>Valor Total:</span>
-                <span id="checkout-total-brl" class="price"></span>
-            </div>
-            
-            <div class="split-box">
-                <p>Simulação do <strong>Stripe Connect Split</strong>:</p>
-                <div class="summary-item" style="margin-top: 10px;">
-                    <span>Profissional (70%):</span>
-                    <span id="checkout-split-prof" class="split-info"></span>
+            <div class="bp-right">
+                <div class="bp-total-box">
+                    <div class="bp-label">Total a Pagar (BRL)</div>
+                    <div class="bp-total-val" id="bp-total">R$ 0,00</div>
                 </div>
-                <div class="summary-item">
-                    <span>Taxa Navegantes (30%):</span>
-                    <span id="checkout-split-nav" class="split-info"></span>
+                
+                <div class="split-details">
+                    <div class="bp-label" style="margin-bottom: 8px; border-bottom: 1px solid #d4cbb8; padding-bottom: 4px;">Detalhamento Stripe Split</div>
+                    <div class="split-line">
+                        <span>Repasse Profissional (70%)</span>
+                        <span id="bp-split-prof">R$ 0,00</span>
+                    </div>
+                    <div class="split-line fee">
+                        <span>Taxa de Embarque (30%)</span>
+                        <span id="bp-split-nav">R$ 0,00</span>
+                    </div>
                 </div>
-                <p id="checkout-exchange-note" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; font-style: italic;"></p>
+                
+                <p id="bp-exchange" style="font-size: 0.65rem; color: #666; margin-bottom: 15px; font-style: italic; line-height: 1.2;">
+                    * Câmbio automático: Você pagará aprox. EUR 0.00.
+                </p>
+                
+                <button class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 0.9rem;" onclick="confirmar()">Processar Pagamento</button>
             </div>
-
-            <button class="btn btn-primary" style="width: 100%; margin-top: 30px; padding: 16px;" onclick="confirmar()">Pagar com Stripe</button>
         </div>
     </div>
 
     <script>
-        function openCheckout(name, price, currency) {
+        function openBoardingPass(profName, servName, price, currency, destCode) {
+            // Lógica do Split (70% Vendedor / 30% Plataforma)
             const tax = 0.30;
             const priceNav = price * tax;
             const priceProf = price - priceNav;
 
-            // Simulação de câmbio
+            // Simulação de câmbio para a experiência do usuário gringo
             const exchangeRates = { 'GBP': 7.1, 'EUR': 6.0, 'USD': 5.6, 'CAD': 4.1 };
             const foreignPrice = (price / exchangeRates[currency]).toFixed(2);
 
-            document.getElementById('checkout-item-name').innerText = name;
-            document.getElementById('checkout-total-brl').innerText = "R$ " + price.toFixed(2);
-            document.getElementById('checkout-split-prof').innerText = "R$ " + priceProf.toFixed(2);
-            document.getElementById('checkout-split-nav').innerText = "R$ " + priceNav.toFixed(2);
+            // Preenchendo o Cartão de Embarque
+            document.getElementById('bp-prof').innerText = profName;
+            document.getElementById('bp-serv').innerText = servName;
+            document.getElementById('bp-dest').innerText = `BRL ✈️ ${currency}`;
             
-            document.getElementById('checkout-exchange-note').innerText = 
-                `* Cliente paga aproximadamente ${currency} ${foreignPrice}. O Stripe Connect processa o câmbio e liquida o split em BRL automaticamente.`;
+            // Valores
+            document.getElementById('bp-total').innerText = "R$ " + price.toFixed(2);
+            document.getElementById('bp-split-prof').innerText = "R$ " + priceProf.toFixed(2);
+            document.getElementById('bp-split-nav').innerText = "R$ " + priceNav.toFixed(2);
+            
+            // Nota de Câmbio
+            document.getElementById('bp-exchange').innerText = 
+                `* Emissão via Stripe Connect. O cartão será debitado em aprox. ${currency} ${foreignPrice}, liquidado em BRL para o profissional.`;
 
+            // Exibir Modal
             document.getElementById('checkoutModal').style.display = 'flex';
         }
 
@@ -246,10 +331,11 @@
         }
 
         function confirmar() {
-            alert("Redirecionando para o ambiente seguro do Stripe...");
+            alert("Redirecionando para o portal de pagamento seguro (Stripe)... Boa viagem!");
             closeModal();
         }
 
+        // Fechar clicando fora do ticket
         window.onclick = function(event) {
             let modal = document.getElementById('checkoutModal');
             if (event.target == modal) { closeModal(); }
