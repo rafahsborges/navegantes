@@ -2,14 +2,14 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Navegantes | Seu Porto Seguro no Mundo</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --brand-navy: #0B1D33; /* Azul escuro do oceano */
-            --brand-ocean: #0066CC; /* Azul mar aberto */
-            --brand-sand: #F4EEDC; /* Areia clara */
+            --brand-navy: #0B1D33;
+            --brand-ocean: #0066CC;
+            --brand-sand: #F4EEDC;
             --white: #ffffff;
             --text-main: #243B53;
             --text-muted: #627D98;
@@ -17,112 +17,134 @@
             --transition: all 0.3s ease;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAFC; color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
         /* --- Botoes --- */
-        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: 8px; font-weight: 700; text-decoration: none; transition: var(--transition); cursor: pointer; border: none; font-size: 1rem; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: 8px; font-weight: 700; text-decoration: none; transition: var(--transition); cursor: pointer; border: none; font-size: 1rem; width: 100%; text-align: center; }
         .btn-primary { background-color: var(--brand-ocean); color: var(--white); }
         .btn-primary:hover { background-color: #0052A3; transform: translateY(-2px); box-shadow: var(--shadow); }
-        .btn-secondary { background-color: var(--white); color: var(--brand-navy); }
-        .btn-secondary:hover { background-color: var(--brand-sand); }
+        .btn-secondary { background-color: var(--white); color: var(--brand-navy); border: 1px solid #E2E8F0; }
 
-        /* --- Header --- */
-        header { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .logo { font-weight: 800; font-size: 1.6rem; color: var(--brand-navy); letter-spacing: -1px; display: flex; align-items: center; gap: 8px; }
-        .logo svg { width: 24px; height: 24px; fill: var(--brand-ocean); }
+        @media (min-width: 768px) {
+            .btn { width: auto; } /* Botões voltam ao tamanho natural no Desktop */
+        }
+
+        /* --- Header & Navegação --- */
+        header { background-color: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .logo { font-weight: 800; font-size: clamp(1.2rem, 4vw, 1.6rem); color: var(--brand-navy); letter-spacing: -1px; display: flex; align-items: center; gap: 8px; z-index: 1001; }
+        .logo svg { width: clamp(20px, 4vw, 24px); height: clamp(20px, 4vw, 24px); fill: var(--brand-ocean); }
+        
+        /* Menu Hambúrguer (Mobile) */
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; }
+        .menu-toggle span { width: 25px; height: 3px; background-color: var(--brand-navy); border-radius: 2px; transition: var(--transition); }
+        
         nav ul { list-style: none; display: flex; gap: 30px; align-items: center; }
         nav a { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.95rem; }
         nav a:hover { color: var(--brand-ocean); }
 
-        /* --- Hero (O Mar) --- */
+        /* --- Hero --- */
         .hero { 
             position: relative;
-            padding: 120px 5%; 
+            padding: clamp(60px, 15vw, 120px) 5%; 
             text-align: center; 
-            background-image: linear-gradient(rgba(11, 29, 51, 0.7), rgba(11, 29, 51, 0.4)), url('https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1920&q=80');
+            background-image: linear-gradient(rgba(11, 29, 51, 0.75), rgba(11, 29, 51, 0.5)), url('https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Efeito Parallax suave */
+            background-attachment: fixed;
             color: var(--white);
-            min-height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            min-height: clamp(60vh, 70vh, 800px);
         }
+        
+        /* O Fix do Background-attachment no iOS (Parallax quebra em iPhones antigos) */
+        @supports (-webkit-touch-callout: none) { .hero { background-attachment: scroll; } }
+
         .hero-tag { background-color: rgba(255,255,255,0.2); backdrop-filter: blur(5px); padding: 6px 16px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
-        .hero h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; letter-spacing: -2px; max-width: 800px; margin-bottom: 24px; }
-        .hero p { font-size: 1.25rem; max-width: 600px; margin-bottom: 40px; font-weight: 400; opacity: 0.9; }
+        .hero h1 { font-size: clamp(2.2rem, 8vw, 4.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; max-width: 800px; margin-bottom: 20px; }
+        .hero p { font-size: clamp(1rem, 3vw, 1.25rem); max-width: 600px; margin-bottom: 30px; font-weight: 400; opacity: 0.9; }
 
-        /* --- Secoes Gerais --- */
-        section { padding: 90px 5%; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-size: 2.5rem; font-weight: 800; color: var(--brand-navy); letter-spacing: -1px; }
-        .section-header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 8px; }
+        /* --- Grid & Seções --- */
+        section { padding: clamp(50px, 10vw, 90px) 5%; }
+        .section-header { text-align: center; margin-bottom: clamp(40px, 8vw, 60px); }
+        .section-header h2 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 800; color: var(--brand-navy); letter-spacing: -1px; }
+        .section-header p { color: var(--text-muted); font-size: clamp(0.95rem, 3vw, 1.1rem); margin-top: 8px; }
 
-        /* --- Grid de Produtos --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; }
         
-        .card { background-color: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); display: flex; flex-direction: column; position: relative; border: 1px solid #E2E8F0; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(11, 29, 51, 0.15); }
+        .card { background-color: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); display: flex; flex-direction: column; border: 1px solid #E2E8F0; }
         
-        /* Tema Visual dos Cards */
-        .card-img-header { height: 140px; background-size: cover; background-position: center; position: relative; }
+        .card-img-header { height: 120px; background-size: cover; background-position: center; position: relative; }
         .header-porto { background-image: url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=600&q=80'); }
         .header-aero { background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80'); }
         
-        .card-tag { position: absolute; top: 16px; right: 16px; background-color: var(--white); color: var(--brand-navy); padding: 4px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .card-tag { position: absolute; top: 12px; right: 12px; background-color: var(--white); color: var(--brand-navy); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         
-        .card-body { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
-        .card-body h3 { font-size: 1.4rem; font-weight: 800; color: var(--brand-navy); margin-bottom: 12px; }
+        .card-body { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+        .prof-info { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; margin-top: -50px; position: relative; z-index: 2; }
+        .prof-avatar { width: 64px; height: 64px; border-radius: 50%; border: 4px solid var(--white); background-size: cover; background-position: center; background-color: #eee; flex-shrink: 0; }
+        
+        .card-body h3 { font-size: clamp(1.2rem, 4vw, 1.4rem); font-weight: 800; color: var(--brand-navy); margin-bottom: 10px; }
         .card-body p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px; flex-grow: 1; }
         
-        .prof-info { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; margin-top: -50px; position: relative; z-index: 2; }
-        .prof-avatar { width: 70px; height: 70px; border-radius: 50%; border: 4px solid var(--white); background-size: cover; background-position: center; background-color: #eee; }
-        
-        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 20px; border-top: 1px dashed #CBD5E1; }
-        .price { font-size: 1.6rem; font-weight: 800; color: var(--brand-navy); }
-        .price span { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+        .card-footer { display: flex; flex-direction: column; gap: 15px; margin-top: auto; padding-top: 20px; border-top: 1px dashed #CBD5E1; }
+        .price { font-size: 1.5rem; font-weight: 800; color: var(--brand-navy); text-align: center; }
+        .price span { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
 
-        /* --- Modal de Pagamento (Cartão de Embarque) --- */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 29, 51, 0.85); z-index: 2000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(8px); }
+        @media (min-width: 768px) {
+            .card-footer { flex-direction: row; justify-content: space-between; align-items: center; }
+            .price { text-align: left; }
+        }
+
+        /* --- Modal "Cartão de Embarque" Responsivo --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 29, 51, 0.9); z-index: 2000; justify-content: center; align-items: center; padding: 15px; backdrop-filter: blur(5px); overflow-y: auto; }
         
-        /* O Ticket de Embarque */
-        .boarding-pass { background-color: var(--white); width: 100%; max-width: 650px; border-radius: 16px; display: flex; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); position: relative; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .boarding-pass { background-color: var(--white); width: 100%; max-width: 650px; border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); position: relative; margin: auto; animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
-        /* Lado Esquerdo do Ticket (Info do Voo/Serviço) */
-        .bp-left { padding: 30px; flex: 2; border-right: 2px dashed #CBD5E1; position: relative; background: radial-gradient(circle at right center, transparent 15px, var(--white) 16px); }
-        .bp-header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--brand-navy); padding-bottom: 15px; margin-bottom: 20px; }
-        .bp-title { font-weight: 800; color: var(--brand-navy); text-transform: uppercase; letter-spacing: 1px; }
-        .bp-flight { color: var(--brand-ocean); font-weight: 700; }
+        .close-modal { position: absolute; top: 15px; right: 15px; cursor: pointer; width: 32px; height: 32px; background: rgba(0,0,0,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--text-main); z-index: 20; font-weight: bold; }
+
+        .bp-left { padding: 25px; background: var(--white); border-bottom: 2px dashed #CBD5E1; }
+        .bp-right { padding: 25px; background-color: var(--brand-sand); }
         
-        .bp-row { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .bp-header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--brand-navy); padding-bottom: 12px; margin-bottom: 15px; }
+        .bp-title { font-weight: 800; color: var(--brand-navy); text-transform: uppercase; font-size: clamp(0.9rem, 3vw, 1.1rem); }
+        .bp-flight { color: var(--brand-ocean); font-weight: 700; font-size: clamp(0.9rem, 3vw, 1.1rem); }
+        
+        .bp-row { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
         .bp-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
-        .bp-value { font-size: 1.1rem; font-weight: 800; color: var(--brand-navy); }
+        .bp-value { font-size: clamp(1rem, 3vw, 1.1rem); font-weight: 800; color: var(--brand-navy); }
         
-        /* Lado Direito do Ticket (Valores e Checkout) */
-        .bp-right { padding: 30px; flex: 1; background-color: var(--brand-sand); position: relative; background: radial-gradient(circle at left center, transparent 15px, var(--brand-sand) 16px); display: flex; flex-direction: column; justify-content: center; }
-        .bp-right::before { content: ''; position: absolute; left: -15px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; background-color: rgba(11, 29, 51, 0.85); border-radius: 50%; z-index: 10; }
+        .bp-total-box { margin-bottom: 20px; text-align: center; }
+        .bp-total-val { font-size: clamp(1.8rem, 6vw, 2.2rem); font-weight: 800; color: var(--brand-navy); line-height: 1; }
         
-        .bp-total-box { margin-bottom: 20px; }
-        .bp-total-val { font-size: 2rem; font-weight: 800; color: var(--brand-navy); line-height: 1; }
-        
-        /* O Split detalhado */
-        .split-details { font-size: 0.8rem; margin-bottom: 20px; }
-        .split-line { display: flex; justify-content: space-between; margin-bottom: 5px; color: var(--text-main); font-weight: 600; }
-        .split-line.fee { color: var(--text-muted); font-weight: 400; }
-        
-        .close-modal { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 1.5rem; color: var(--text-main); z-index: 20; font-weight: bold; }
+        .split-details { font-size: 0.85rem; margin-bottom: 20px; background: rgba(255,255,255,0.5); padding: 15px; border-radius: 8px; }
+        .split-line { display: flex; justify-content: space-between; margin-bottom: 8px; color: var(--text-main); font-weight: 700; }
+        .split-line.fee { color: var(--text-muted); font-weight: 500; }
 
+        @media (min-width: 600px) {
+            .boarding-pass { flex-direction: row; }
+            .bp-left { flex: 2; border-bottom: none; border-right: 2px dashed #CBD5E1; position: relative; }
+            /* Efeito de picote no bilhete (Desktop) */
+            .bp-left::after { content:''; position:absolute; top:-10px; right:-10px; width:20px; height:20px; background:rgba(11,29,51,0.9); border-radius:50%; }
+            .bp-left::before { content:''; position:absolute; bottom:-10px; right:-10px; width:20px; height:20px; background:rgba(11,29,51,0.9); border-radius:50%; }
+            .bp-right { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+            .bp-row { flex-direction: row; justify-content: space-between; }
+            .bp-row > div:nth-child(2) { text-align: right; }
+            .bp-total-box { text-align: left; }
+        }
+
+        /* --- Responsividade do Menu --- */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
-            .boarding-pass { flex-direction: column; }
-            .bp-left { border-right: none; border-bottom: 2px dashed #CBD5E1; background: var(--white); }
-            .bp-right { background: var(--brand-sand); }
-            .bp-right::before { display: none; }
-            nav ul { display: none; }
+            .menu-toggle { display: flex; }
+            nav ul { position: absolute; top: 100%; left: 0; width: 100%; background-color: var(--white); flex-direction: column; padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; gap: 0; box-shadow: 0 10px 10px rgba(0,0,0,0.05); }
+            nav ul.active { max-height: 300px; border-top: 1px solid #eee; }
+            nav ul li { width: 100%; text-align: center; border-bottom: 1px solid #f1f5f9; }
+            nav ul li a { display: block; padding: 16px; font-size: 1rem; }
+            nav ul li a.btn { margin: 15px auto; width: 90%; }
         }
     </style>
 </head>
@@ -133,28 +155,35 @@
             <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm9-14L4 14h16L12 4z"/></svg>
             NAVEGANTES
         </div>
+        
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
         <nav>
-            <ul>
-                <li><a href="#porto-seguro">Porto Seguro (Saúde)</a></li>
-                <li><a href="#plano-voo">Plano de Voo (Consultoria)</a></li>
-                <li><a href="#" class="btn btn-primary" style="padding: 8px 16px;">Login Profissional</a></li>
+            <ul id="nav-menu">
+                <li><a href="#porto-seguro" onclick="toggleMenu()">Porto Seguro</a></li>
+                <li><a href="#plano-voo" onclick="toggleMenu()">Plano de Voo</a></li>
+                <li><a href="#" class="btn btn-primary" style="padding: 10px 20px;">Área Restrita</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
-        <span class="hero-tag">A sua jornada além-mar</span>
+        <span class="hero-tag">Sua jornada além-mar</span>
         <h1>Navegue pelo mundo com um porto seguro.</h1>
-        <p>Apoio psicológico e estratégico (vistos, carreira, finanças) para brasileiros no exterior. Trace sua rota e embarque com segurança.</p>
-        <div style="display: flex; gap: 16px;">
-            <a href="#porto-seguro" class="btn btn-primary">Ver Profissionais</a>
+        <p>Apoio psicológico e estratégico (vistos, carreira) para brasileiros no exterior. Embarque nessa jornada com segurança.</p>
+        <div style="width: 100%; max-width: 300px;">
+            <a href="#porto-seguro" class="btn btn-primary">Encontrar Profissional</a>
         </div>
     </section>
 
     <section id="porto-seguro">
         <div class="section-header">
             <h2>⚓ Seu Porto Seguro</h2>
-            <p>Psicólogos especializados em luto migratório, ansiedade e adaptação cultural.</p>
+            <p>Psicólogos especializados em luto migratório e adaptação.</p>
         </div>
         <div class="grid">
             <div class="card">
@@ -166,13 +195,13 @@
                         <div class="prof-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg')"></div>
                         <div>
                             <div class="bp-label">Especialista</div>
-                            <div style="font-weight: 700; color: var(--brand-navy);">Dra. Camila Moraes</div>
+                            <div style="font-weight: 700; color: var(--brand-navy); line-height: 1.2;">Dra. Camila Moraes</div>
                         </div>
                     </div>
                     <h3>Terapia de Ancoragem</h3>
-                    <p>Apoio focado em brasileiros que enfrentam desafios emocionais e solidão na Europa.</p>
+                    <p>Apoio focado em brasileiros que enfrentam solidão e desafios na Europa.</p>
                     <div class="card-footer">
-                        <div class="price">R$ 220 <span>/Sessão</span></div>
+                        <div class="price">R$ 220<br><span>/Sessão</span></div>
                         <button class="btn btn-primary" onclick="openBoardingPass('Dra. Camila Moraes', 'Terapia de Ancoragem', 220, 'EUR', 'LIS')">Embarcar</button>
                     </div>
                 </div>
@@ -187,14 +216,14 @@
                         <div class="prof-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg')"></div>
                         <div>
                             <div class="bp-label">Especialista</div>
-                            <div style="font-weight: 700; color: var(--brand-navy);">Dr. Ricardo Dias</div>
+                            <div style="font-weight: 700; color: var(--brand-navy); line-height: 1.2;">Dr. Ricardo Dias</div>
                         </div>
                     </div>
-                    <h3>Bússola de Carreira</h3>
-                    <p>Especialista em ansiedade de performance para executivos brasileiros nos EUA.</p>
+                    <h3>Bússola Emocional</h3>
+                    <p>Especialista em ansiedade de performance para executivos nos EUA.</p>
                     <div class="card-footer">
-                        <div class="price">R$ 280 <span>/Sessão</span></div>
-                        <button class="btn btn-primary" onclick="openBoardingPass('Dr. Ricardo Dias', 'Bússola de Carreira', 280, 'USD', 'JFK')">Embarcar</button>
+                        <div class="price">R$ 280<br><span>/Sessão</span></div>
+                        <button class="btn btn-primary" onclick="openBoardingPass('Dr. Ricardo Dias', 'Bússola Emocional', 280, 'USD', 'JFK')">Embarcar</button>
                     </div>
                 </div>
             </div>
@@ -204,7 +233,7 @@
     <section id="plano-voo" style="background-color: var(--white);">
         <div class="section-header">
             <h2>✈️ Plano de Voo</h2>
-            <p>Consultorias estratégicas para emissão de vistos, carreira e cidadania.</p>
+            <p>Consultorias estratégicas para carreira internacional e cidadania.</p>
         </div>
         <div class="grid">
             <div class="card">
@@ -212,10 +241,10 @@
                     <span class="card-tag">Carreira</span>
                 </div>
                 <div class="card-body">
-                    <h3 style="margin-top: 20px;">Rota Executiva Global</h3>
-                    <p>Mentoria individual para reestruturar seu currículo e buscar vagas de alto nível no Canadá e Europa.</p>
+                    <h3 style="margin-top: 15px;">Rota Executiva Global</h3>
+                    <p>Mentoria individual para reestruturar seu currículo e buscar vagas de alto nível no Canadá.</p>
                     <div class="card-footer">
-                        <div class="price">R$ 480 <span>/Pacote</span></div>
+                        <div class="price">R$ 480<br><span>/Pacote</span></div>
                         <button class="btn btn-primary" onclick="openBoardingPass('Consultoria Carreira', 'Rota Executiva Global', 480, 'CAD', 'YYZ')">Emitir Bilhete</button>
                     </div>
                 </div>
@@ -226,10 +255,10 @@
                     <span class="card-tag">Imigração</span>
                 </div>
                 <div class="card-body">
-                    <h3 style="margin-top: 20px;">Visto & Cidadania</h3>
-                    <p>Análise completa de elegibilidade e documentação para cidadania italiana e portuguesa.</p>
+                    <h3 style="margin-top: 15px;">Visto & Cidadania</h3>
+                    <p>Análise de elegibilidade e documentação para cidadania europeia.</p>
                     <div class="card-footer">
-                        <div class="price">R$ 350 <span>/Consulta</span></div>
+                        <div class="price">R$ 350<br><span>/Consulta</span></div>
                         <button class="btn btn-primary" onclick="openBoardingPass('Navegantes Legal', 'Visto & Cidadania', 350, 'EUR', 'MXP')">Emitir Bilhete</button>
                     </div>
                 </div>
@@ -239,7 +268,7 @@
 
     <div id="checkoutModal" class="modal">
         <div class="boarding-pass">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <span class="close-modal" onclick="closeModal()">×</span>
             
             <div class="bp-left">
                 <div class="bp-header">
@@ -252,15 +281,15 @@
                         <div class="bp-label">Passageiro / Paciente</div>
                         <div class="bp-value">Visitante VIP</div>
                     </div>
-                    <div style="text-align: right;">
-                        <div class="bp-label">Destino de Conversão</div>
+                    <div>
+                        <div class="bp-label">Rota Financeira</div>
                         <div class="bp-value" id="bp-dest">GRU ✈️ LIS</div>
                     </div>
                 </div>
                 
                 <div class="bp-row" style="margin-bottom: 0;">
                     <div>
-                        <div class="bp-label">Profissional / Guia</div>
+                        <div class="bp-label">Especialista</div>
                         <div class="bp-value" id="bp-prof">Dra. Nome</div>
                     </div>
                     <div>
@@ -277,9 +306,9 @@
                 </div>
                 
                 <div class="split-details">
-                    <div class="bp-label" style="margin-bottom: 8px; border-bottom: 1px solid #d4cbb8; padding-bottom: 4px;">Detalhamento Stripe Split</div>
+                    <div class="bp-label" style="margin-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 4px;">Detalhamento Stripe Split</div>
                     <div class="split-line">
-                        <span>Repasse Profissional (70%)</span>
+                        <span>Profissional (70%)</span>
                         <span id="bp-split-prof">R$ 0,00</span>
                     </div>
                     <div class="split-line fee">
@@ -288,41 +317,42 @@
                     </div>
                 </div>
                 
-                <p id="bp-exchange" style="font-size: 0.65rem; color: #666; margin-bottom: 15px; font-style: italic; line-height: 1.2;">
-                    * Câmbio automático: Você pagará aprox. EUR 0.00.
+                <p id="bp-exchange" style="font-size: 0.7rem; color: #666; margin-bottom: 15px; font-style: italic; line-height: 1.3;">
+                    * Câmbio Automático: O Stripe converterá aprox. EUR 0.00.
                 </p>
                 
-                <button class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 0.9rem;" onclick="confirmar()">Processar Pagamento</button>
+                <button class="btn btn-primary" onclick="confirmar()">Processar Pagamento</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Lógica do Menu Mobile
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Lógica do Modal e Split
         function openBoardingPass(profName, servName, price, currency, destCode) {
-            // Lógica do Split (70% Vendedor / 30% Plataforma)
             const tax = 0.30;
             const priceNav = price * tax;
             const priceProf = price - priceNav;
 
-            // Simulação de câmbio para a experiência do usuário gringo
             const exchangeRates = { 'GBP': 7.1, 'EUR': 6.0, 'USD': 5.6, 'CAD': 4.1 };
             const foreignPrice = (price / exchangeRates[currency]).toFixed(2);
 
-            // Preenchendo o Cartão de Embarque
             document.getElementById('bp-prof').innerText = profName;
             document.getElementById('bp-serv').innerText = servName;
             document.getElementById('bp-dest').innerText = `BRL ✈️ ${currency}`;
             
-            // Valores
             document.getElementById('bp-total').innerText = "R$ " + price.toFixed(2);
             document.getElementById('bp-split-prof').innerText = "R$ " + priceProf.toFixed(2);
             document.getElementById('bp-split-nav').innerText = "R$ " + priceNav.toFixed(2);
             
-            // Nota de Câmbio
             document.getElementById('bp-exchange').innerText = 
-                `* Emissão via Stripe Connect. O cartão será debitado em aprox. ${currency} ${foreignPrice}, liquidado em BRL para o profissional.`;
+                `* Emissão via Stripe Connect. Liquidação em BRL, cobrança estimada em ${currency} ${foreignPrice}.`;
 
-            // Exibir Modal
             document.getElementById('checkoutModal').style.display = 'flex';
         }
 
@@ -331,11 +361,10 @@
         }
 
         function confirmar() {
-            alert("Redirecionando para o portal de pagamento seguro (Stripe)... Boa viagem!");
+            alert("Redirecionando para o Stripe... Boa viagem!");
             closeModal();
         }
 
-        // Fechar clicando fora do ticket
         window.onclick = function(event) {
             let modal = document.getElementById('checkoutModal');
             if (event.target == modal) { closeModal(); }
