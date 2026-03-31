@@ -1,1 +1,392 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navegantes | Consultoria e Terapia Internacional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --marinho: #1a3c5a;
+            --marinho-claro: #2c5d8a;
+            --areia: #f4e1d2;
+            --dourado: #c5a059;
+            --branco: #ffffff;
+            --gelo: #f8f9fa;
+            --texto: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--gelo);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Navegação --- */
+        header {
+            background-color: var(--marinho);
+            color: var(--branco);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--dourado);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--branco);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--dourado);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(26, 60, 90, 0.8), rgba(26, 60, 90, 0.6)), 
+                        url('https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--branco);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        /* --- Cards de Serviços --- */
+        .container {
+            padding: 5rem 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--marinho);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--branco);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border-bottom: 4px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--dourado);
+        }
+
+        .card-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--dourado);
+            letter-spacing: 1px;
+        }
+
+        .card h3 {
+            margin: 10px 0;
+            color: var(--marinho);
+        }
+
+        .price-box {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--marinho);
+        }
+
+        .btn-pay {
+            background-color: var(--marinho);
+            color: var(--branco);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-pay:hover {
+            background-color: var(--dourado);
+        }
+
+        /* --- Modal de Checkout (Simulação Stripe) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(26, 60, 90, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--branco);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px; right: 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .split-list {
+            margin: 25px 0;
+            background: var(--gelo);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--dourado);
+        }
+
+        .split-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .conversion-info {
+            font-size: 0.75rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 15px;
+            display: block;
+        }
+
+        .footer {
+            background: var(--marinho);
+            color: var(--branco);
+            text-align: center;
+            padding: 3rem;
+            margin-top: 4rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">NAVE<span>GANTES</span></div>
+        <nav>
+            <ul>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#">Psicólogos</a></li>
+                <li><a href="#">Consultoria</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Sua bússola em terra estrangeira</h1>
+        <p>Conectamos brasileiros no exterior a portos seguros: saúde mental, consultoria migratória e suporte estratégico para sua nova jornada.</p>
+        <a href="#servicos" class="btn-pay" style="text-decoration: none; padding: 15px 40px; font-size: 1.1rem;">Explorar Serviços</a>
+    </section>
+
+    <div class="container" id="servicos">
+        <div class="section-title">
+            <h2>Nossas Especialidades</h2>
+            <p>Escolha o profissional e agende sua sessão com conversão automática de moeda.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=500&q=80')"></div>
+                <div class="card-content">
+                    <span class="tag">Psicologia Clínica</span>
+                    <h3>Dr. Tiago Silva</h3>
+                    <p>Especialista em luto migratório e adaptação cultural para expatriados.</p>
+                    <div class="price-box">
+                        <span class="price">R$ 220,00</span>
+                        <button class="btn-pay" onclick="abrirCheckout('Dr. Tiago Silva', 220, 'GBP')">Agendar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=500&q=80')"></div>
+                <div class="card-content">
+                    <span class="tag">Consultoria Jurídica</span>
+                    <h3>Dra. Helena Martins</h3>
+                    <p>Assessoria para vistos e cidadania na União Europeia.</p>
+                    <div class="price-box">
+                        <span class="price">R$ 450,00</span>
+                        <button class="btn-pay" onclick="abrirCheckout('Dra. Helena Martins', 450, 'EUR')">Contratar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?auto=format&fit=crop&w=500&q=80')"></div>
+                <div class="card-content">
+                    <span class="tag">Planejamento</span>
+                    <h3>Consultoria Porto</h3>
+                    <p>Planejamento financeiro para brasileiros que recebem em moeda forte.</p>
+                    <div class="price-box">
+                        <span class="price">R$ 300,00</span>
+                        <button class="btn-pay" onclick="abrirCheckout('Navegantes Porto', 300, 'USD')">Solicitar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal()">&times;</span>
+            <h3 style="color: var(--marinho); font-family: 'Playfair Display', serif;">Resumo da Operação</h3>
+            <p id="desc-servico" style="margin-top: 10px;"></p>
+            
+            <div class="split-list">
+                <div class="split-item">
+                    <span>Valor Total (BRL):</span>
+                    <span id="valor-total"></span>
+                </div>
+                <div class="split-item" style="color: #27ae60; font-weight: bold;">
+                    <span>Repasse ao Profissional (70%):</span>
+                    <span id="valor-vendedor"></span>
+                </div>
+                <div class="split-item" style="color: var(--marinho-claro);">
+                    <span>Taxa Navegantes (30%):</span>
+                    <span id="valor-plataforma"></span>
+                </div>
+                
+                <span class="conversion-info" id="info-cambio"></span>
+            </div>
+
+            <button class="btn-pay" style="width: 100%; padding: 15px;" onclick="confirmar()">Finalizar com Stripe Connect</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="logo">NAVE<span>GANTES</span></div>
+        <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.7;">&copy; 2026 Navegantes Intermediações. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function abrirCheckout(nome, valor, moeda) {
+            const taxa = 0.30;
+            const valorPlataforma = valor * taxa;
+            const valorVendedor = valor - valorPlataforma;
+
+            // Simulação simples de câmbio para visualização
+            const taxasCambio = { 'GBP': 7.2, 'EUR': 6.1, 'USD': 5.5 };
+            const valorNaMoedaEstrangeira = (valor / taxasCambio[moeda]).toFixed(2);
+
+            document.getElementById('desc-servico').innerText = "Serviço com: " + nome;
+            document.getElementById('valor-total').innerText = "R$ " + valor.toFixed(2);
+            document.getElementById('valor-vendedor').innerText = "R$ " + valorVendedor.toFixed(2);
+            document.getElementById('valor-plataforma').innerText = "R$ " + valorPlataforma.toFixed(2);
+            
+            document.getElementById('info-cambio').innerText = 
+                `* O cliente pagará aproximadamente ${moeda} ${valorNaMoedaEstrangeira}. O Stripe converterá e liquidará os valores em Real (BRL) automaticamente.`;
+
+            document.getElementById('checkoutModal').style.display = 'flex';
+        }
+
+        function fecharModal() {
+            document.getElementById('checkoutModal').style.display = 'none';
+        }
+
+        function confirmar() {
+            alert("Redirecionando para o ambiente seguro do Stripe...");
+            fecharModal();
+        }
+
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            let modal = document.getElementById('checkoutModal');
+            if (event.target == modal) {
+                fecharModal();
+            }
+        }
+    </script>
+</body>
+</html>
